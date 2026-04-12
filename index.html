@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+  <meta name="description" content="Mochi — AI Virtual Pet + Lightweight Assistant. A cute, emotional, offline-first PWA companion.">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Mochi">
+  <title>Mochi 🍡</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/svg+xml" href="/icons/icon.svg">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/ui/styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header id="app-header">
+      <h1 id="app-title">🍡 Mochi</h1>
+      <button id="settings-toggle" aria-label="Open Settings" title="Settings">⚙️</button>
+    </header>
+
+    <!-- Status Bars -->
+    <div id="status-bars" aria-label="Mochi Status">
+      <div class="status-bar" id="status-mood">
+        <span class="status-icon">😊</span>
+        <div class="bar-track"><div class="bar-fill mood-fill" id="mood-bar"></div></div>
+        <span class="status-label" id="mood-label">50</span>
+      </div>
+      <div class="status-bar" id="status-hunger">
+        <span class="status-icon">🍔</span>
+        <div class="bar-track"><div class="bar-fill hunger-fill" id="hunger-bar" style="width:70%"></div></div>
+        <span class="status-label" id="hunger-label">70</span>
+      </div>
+      <div class="status-bar" id="status-energy">
+        <span class="status-icon">⚡</span>
+        <div class="bar-track"><div class="bar-fill energy-fill" id="energy-bar"></div></div>
+        <span class="status-label" id="energy-label">80</span>
+      </div>
+    </div>
+
+    <!-- Speech Bubble -->
+    <div id="speech-bubble" class="hidden" aria-live="polite">
+      <p id="speech-text"></p>
+    </div>
+
+    <!-- Mochi Container -->
+    <div id="mochi-container" role="img" aria-label="Mochi the virtual pet">
+      <div id="mochi-touch-zone" tabindex="0" aria-label="Pet Mochi"></div>
+    </div>
+
+    <!-- Emotion Indicator -->
+    <div id="emotion-indicator" aria-label="Current mood">
+      <span id="emotion-emoji">😊</span>
+      <span id="emotion-text">Happy</span>
+    </div>
+
+    <!-- Action Buttons -->
+    <div id="actions" role="toolbar" aria-label="Mochi Actions">
+      <button id="feed-btn" class="action-btn" aria-label="Feed Mochi" data-action="feed">
+        <span class="btn-icon">🍡</span>
+        <span class="btn-label" data-i18n="ui.feed">Feed</span>
+      </button>
+      <button id="play-btn" class="action-btn" aria-label="Play with Mochi" data-action="play">
+        <span class="btn-icon">🎮</span>
+        <span class="btn-label" data-i18n="ui.play">Play</span>
+      </button>
+      <button id="talk-btn" class="action-btn" aria-label="Talk to Mochi" data-action="talk">
+        <span class="btn-icon">🎤</span>
+        <span class="btn-label" data-i18n="ui.talk">Talk</span>
+      </button>
+      <button id="sleep-btn" class="action-btn" aria-label="Put Mochi to sleep" data-action="sleep">
+        <span class="btn-icon">💤</span>
+        <span class="btn-label" data-i18n="ui.sleep">Sleep</span>
+      </button>
+    </div>
+
+    <!-- Settings Panel (overlay) -->
+    <div id="settings-panel" class="panel hidden" role="dialog" aria-label="Settings">
+      <div class="panel-header">
+        <h2 data-i18n="ui.settings">Settings</h2>
+        <button id="settings-close" class="close-btn" aria-label="Close Settings">✕</button>
+      </div>
+      <div class="panel-body">
+        <!-- Color Selection -->
+        <section class="settings-section">
+          <h3 data-i18n="ui.color">Color</h3>
+          <div id="color-selector" class="color-grid"></div>
+        </section>
+
+        <!-- Language Selection -->
+        <section class="settings-section">
+          <h3 data-i18n="ui.language">Language</h3>
+          <div id="language-selector" class="lang-options">
+            <button class="lang-btn" data-lang="en">🇬🇧 English</button>
+            <button class="lang-btn" data-lang="es">🇪🇸 Español</button>
+            <button class="lang-btn" data-lang="it">🇮🇹 Italiano</button>
+          </div>
+        </section>
+
+        <!-- Alarm -->
+        <section class="settings-section">
+          <h3 data-i18n="ui.alarm">Alarm</h3>
+          <div class="alarm-control">
+            <input type="time" id="alarm-time-input" aria-label="Set alarm time">
+            <button id="alarm-set-btn" class="small-btn">Set</button>
+            <button id="alarm-cancel-btn" class="small-btn danger">Cancel</button>
+          </div>
+          <p id="alarm-status" class="status-text"></p>
+        </section>
+
+        <!-- Reminders -->
+        <section class="settings-section">
+          <h3 data-i18n="ui.reminders">Reminders</h3>
+          <div class="reminder-control">
+            <input type="text" id="reminder-text-input" placeholder="Reminder text..." aria-label="Reminder text" maxlength="100">
+            <input type="datetime-local" id="reminder-time-input" aria-label="Reminder time">
+            <button id="reminder-add-btn" class="small-btn">Add</button>
+          </div>
+          <ul id="reminders-list" class="reminders-list"></ul>
+        </section>
+
+        <!-- About -->
+        <section class="settings-section about-section">
+          <p class="about-text">Mochi v1.0 — AI Virtual Pet</p>
+          <a href="https://buymeacoffee.com/muracciolei" target="_blank" rel="noopener noreferrer" class="support-link" id="support-link" data-i18n="support.link">Support Mochi ☕</a>
+        </section>
+      </div>
+    </div>
+
+    <!-- Support Toast (3rd day notification) -->
+    <div id="support-toast" class="toast hidden" role="alert" aria-live="assertive">
+      <p id="support-toast-text"></p>
+      <a href="https://buymeacoffee.com/muracciolei" target="_blank" rel="noopener noreferrer" class="toast-link">☕</a>
+      <button id="support-toast-close" class="toast-close" aria-label="Dismiss">✕</button>
+    </div>
+
+    <!-- Listening indicator -->
+    <div id="listening-indicator" class="hidden" aria-label="Listening for voice input">
+      <div class="pulse-ring"></div>
+      <span>🎤</span>
+    </div>
+  </div>
+
+  <script type="module" src="/src/index.js"></script>
+</body>
+</html>

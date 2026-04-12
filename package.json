@@ -1,0 +1,21 @@
+{
+  "name": "mochi-ai-pet-pwa",
+  "version": "1.0.0",
+  "description": "AI Virtual Pet + Lightweight Assistant PWA",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest --run"
+  },
+  "keywords": ["pwa", "virtual-pet", "ai", "assistant"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "fast-check": "^3.15.0",
+    "vite": "^5.0.0",
+    "vitest": "^1.2.0"
+  }
+}
