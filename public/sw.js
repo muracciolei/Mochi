@@ -2,12 +2,12 @@
  * Mochi Service Worker — Offline caching strategy
  */
 
-const CACHE_NAME = 'mochi-v1';
+const CACHE_NAME = 'mochi-v2';
 const STATIC_ASSETS = [
   './',
   './index.html',
-  './manifest.json',
-  './icons/icon.svg',
+  './assets/manifest-Dd3Mre8_.json',
+  './assets/icon-C5bVcvIU.svg',
   './assets/index-BKqHByvW.js',
   './assets/index-Cu1kkl7j.css',
   './assets/llm-CxKwKzAf.js',
@@ -45,17 +45,13 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
-          // Cache API responses
           const clone = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
             cache.put(event.request, clone);
           });
           return response;
         })
-        .catch(() => {
-          // Fallback to cache
-          return caches.match(event.request);
-        })
+        .catch(() => caches.match(event.request))
     );
     return;
   }
