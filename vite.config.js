@@ -11,7 +11,8 @@ export default defineConfig({
           llm: ['./src/llm/WebLLMModule.js']
         }
       }
-    }
+    },
+    copyPublicDir: true
   },
   server: {
     port: 3000,

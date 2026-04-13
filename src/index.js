@@ -643,7 +643,7 @@ class MochiApp {
   async registerServiceWorker() {
     if ('serviceWorker' in navigator) {
       try {
-        const registration = await navigator.serviceWorker.register('/sw.js');
+        const registration = await navigator.serviceWorker.register('./sw.js');
         console.log('SW registered:', registration.scope);
       } catch (error) {
         console.warn('SW registration failed:', error);

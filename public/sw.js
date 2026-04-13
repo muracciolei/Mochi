@@ -4,27 +4,14 @@
 
 const CACHE_NAME = 'mochi-v1';
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icons/icon.svg',
-  '/src/ui/styles.css',
-  '/src/index.js',
-  '/src/state/StateManager.js',
-  '/src/state/EmotionalSystem.js',
-  '/src/state/DailyRoutineSystem.js',
-  '/src/state/AlarmSystem.js',
-  '/src/state/ReminderSystem.js',
-  '/src/animations/AnimationEngine.js',
-  '/src/voice/VoiceSystem.js',
-  '/src/apis/ToolSystem.js',
-  '/src/rss/RSSParser.js',
-  '/src/i18n/I18nModule.js',
-  '/src/llm/WebLLMModule.js',
-  '/src/games/MiniGame.js',
-  '/src/audio/AudioSystem.js',
-  '/src/ui/ActionHandler.js',
-  '/src/ui/ColorSystem.js'
+  './',
+  './index.html',
+  './manifest.json',
+  './icons/icon.svg',
+  './assets/index-BKqHByvW.js',
+  './assets/index-Cu1kkl7j.css',
+  './assets/llm-CxKwKzAf.js',
+  './assets/RSSParser-DVh2S25m.js'
 ];
 
 // Install — cache static assets
