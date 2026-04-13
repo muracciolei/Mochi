@@ -3,7 +3,6 @@
  * Main application entry point — wires all modules together
  */
 
-import './ui/styles.css';
 import { StateManager } from './state/StateManager.js';
 import { EmotionalSystem } from './state/EmotionalSystem.js';
 import { DailyRoutineSystem } from './state/DailyRoutineSystem.js';
