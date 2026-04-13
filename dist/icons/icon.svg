@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#2a2a4e"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </radialGradient>
+    <radialGradient id="body" cx="45%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#ff8dc7"/>
+      <stop offset="100%" stop-color="#ff69b4"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="100" fill="url(#bg)"/>
+  <!-- Body -->
+  <circle cx="256" cy="270" r="140" fill="url(#body)" stroke="#e8558a" stroke-width="4"/>
+  <!-- Eyes -->
+  <path d="M200 240 Q215 260 230 240" stroke="#333" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M282 240 Q297 260 312 240" stroke="#333" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- Mouth -->
+  <path d="M225 290 Q256 320 287 290" stroke="#333" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Blush left -->
+  <ellipse cx="185" cy="285" rx="22" ry="12" fill="#ff9ec5" opacity="0.6"/>
+  <!-- Blush right -->
+  <ellipse cx="327" cy="285" rx="22" ry="12" fill="#ff9ec5" opacity="0.6"/>
+  <!-- Sparkle -->
+  <text x="350" y="170" font-size="40" opacity="0.7">✨</text>
+</svg>
