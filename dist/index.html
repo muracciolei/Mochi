@@ -10,19 +10,22 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Mochi">
   <title>Mochi 🍡</title>
-  <link rel="manifest" href="./assets/manifest-Dd3Mre8_.json">
-  <link rel="icon" type="image/svg+xml" href="./assets/icon-C5bVcvIU.svg">
-  <link rel="apple-touch-icon" href="./assets/icon-C5bVcvIU.svg">
-  <script type="module" crossorigin src="./assets/index-BKqHByvW.js"></script>
+  <link rel="manifest" href="./assets/manifest-9s8ZCGQr.json">
+  <link rel="icon" type="image/svg+xml" href="./assets/icon-BcejJf9x.svg">
+  <link rel="apple-touch-icon" href="./assets/icon-BcejJf9x.svg">
+  <script type="module" crossorigin src="./assets/index-DBQUmx-O.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/llm-CxKwKzAf.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-Cu1kkl7j.css">
+  <link rel="stylesheet" crossorigin href="./assets/index-BVWaginB.css">
 </head>
 <body>
   <div id="app">
     <!-- Header -->
     <header id="app-header">
       <h1 id="app-title">🍡 Mochi</h1>
-      <button id="settings-toggle" aria-label="Open Settings" title="Settings">⚙️</button>
+      <div class="header-actions">
+        <a id="support-icon" href="https://buymeacoffee.com/muracciolei" target="_blank" rel="noopener noreferrer" aria-label="Support Mochi" title="Support Mochi">☕</a>
+        <button id="settings-toggle" aria-label="Open Settings" title="Settings">⚙️</button>
+      </div>
     </header>
 
     <!-- Status Bars -->
@@ -79,6 +82,12 @@
         <span class="btn-label" data-i18n="ui.sleep">Sleep</span>
       </button>
     </div>
+
+    <!-- Support Button (always visible) -->
+    <a id="support-button" class="support-btn" href="https://buymeacoffee.com/muracciolei" target="_blank" rel="noopener noreferrer" aria-label="Support Mochi on Buy Me a Coffee">
+      <span class="support-btn-icon">☕</span>
+      <span class="support-btn-label">Support Mochi</span>
+    </a>
 
     <!-- Settings Panel (overlay) -->
     <div id="settings-panel" class="panel hidden" role="dialog" aria-label="Settings">
@@ -146,6 +155,6 @@
       <span>🎤</span>
     </div>
   </div>
-
+
 </body>
 </html>
