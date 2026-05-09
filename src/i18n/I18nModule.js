@@ -577,9 +577,24 @@ export class I18nModule {
     this.currentLanguage = this.detectLanguage();
   }
 
+  /**
+   * Detect best-fit language from navigator preferences.
+   * Walks navigator.languages in order, falling back to navigator.language,
+   * then to 'en'. Each entry's region is stripped (e.g. "pt-BR" → "pt").
+   */
   detectLanguage() {
-    const browserLang = (navigator.language || 'en').toLowerCase().split('-')[0];
-    return SUPPORTED.includes(browserLang) ? browserLang : 'en';
+    const candidates = [];
+    if (Array.isArray(navigator.languages)) {
+      candidates.push(...navigator.languages);
+    }
+    if (navigator.language) candidates.push(navigator.language);
+
+    for (const raw of candidates) {
+      if (!raw) continue;
+      const lang = String(raw).toLowerCase().split('-')[0];
+      if (SUPPORTED.includes(lang)) return lang;
+    }
+    return 'en';
   }
 
   setLanguage(lang) {

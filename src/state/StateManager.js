@@ -15,7 +15,8 @@ const DEFAULT_STATE = {
     returnHome: null,
     dinner: null
   },
-  language: 'en',
+  // null → detect from navigator.language on first run
+  language: null,
   colorPreset: 'pink',
   alarm: null,
   reminders: [],
@@ -164,7 +165,7 @@ export class StateManager {
     if (typeof state.energy === 'number') validated.energy = state.energy;
     if (typeof state.lastInteraction === 'number') validated.lastInteraction = state.lastInteraction;
     if (typeof state.dailyInteractions === 'object' && state.dailyInteractions) validated.dailyInteractions = state.dailyInteractions;
-    if (typeof state.language === 'string') validated.language = state.language;
+    if (typeof state.language === 'string' && state.language) validated.language = state.language;
     if (typeof state.colorPreset === 'string') validated.colorPreset = state.colorPreset;
     if (state.alarm !== undefined) validated.alarm = state.alarm;
     if (Array.isArray(state.reminders)) validated.reminders = state.reminders;
