@@ -20,6 +20,7 @@
  */
 
 import { IdentitySystem } from '../state/IdentitySystem.js';
+import { PetRenderer } from './PetRenderer.js';
 
 const W = 1080;
 const H = 1920;
@@ -106,138 +107,11 @@ export class ShareCardSystem {
   }
 
   drawPet(ctx, palette, dna, stageId, scale, cx, cy) {
-    const radius = 280 * scale;
-
-    // Egg stage: just an egg shape with sparkles, no face yet
-    if (stageId === 'egg') {
-      ctx.save();
-      ctx.translate(cx, cy);
-      const grad = ctx.createRadialGradient(-radius * 0.3, -radius * 0.4, radius * 0.2, 0, 0, radius);
-      grad.addColorStop(0, this.lighten(palette.primary, 35));
-      grad.addColorStop(1, palette.primary);
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.ellipse(0, 0, radius * 0.85, radius * 1.05, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.strokeStyle = this.darken(palette.primary, 25);
-      ctx.lineWidth = 8;
-      ctx.stroke();
-      ctx.restore();
-      return;
-    }
-
-    // Body
-    ctx.save();
-    ctx.translate(cx, cy);
-    const grad = ctx.createRadialGradient(-radius * 0.3, -radius * 0.4, radius * 0.2, 0, 0, radius);
-    grad.addColorStop(0, this.lighten(palette.primary, 30));
-    grad.addColorStop(1, palette.primary);
-    ctx.fillStyle = grad;
-    const bodyW = radius * (0.95 + dna.bodyShape * 0.15);
-    const bodyH = radius * (1.0 - dna.bodyShape * 0.1);
-    ctx.beginPath();
-    ctx.ellipse(0, 0, bodyW, bodyH, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.strokeStyle = this.darken(palette.primary, 25);
-    ctx.lineWidth = 8;
-    ctx.stroke();
-
-    // Highlight
-    ctx.fillStyle = 'rgba(255,255,255,0.3)';
-    ctx.beginPath();
-    ctx.ellipse(-bodyW * 0.3, -bodyH * 0.4, bodyW * 0.18, bodyH * 0.12, 0, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Antenna based on DNA
-    if (dna.antenna === 1) {
-      ctx.fillStyle = this.darken(palette.primary, 30);
-      ctx.beginPath();
-      ctx.ellipse(0, -bodyH - 15, 12, 22, 0, 0, Math.PI * 2);
-      ctx.fill();
-    } else if (dna.antenna === 2) {
-      ctx.strokeStyle = this.darken(palette.primary, 30);
-      ctx.lineWidth = 8;
-      ctx.beginPath();
-      ctx.moveTo(0, -bodyH);
-      ctx.quadraticCurveTo(20, -bodyH - 30, 0, -bodyH - 50);
-      ctx.stroke();
-    } else if (dna.antenna === 3) {
-      ctx.fillStyle = '#ffd700';
-      ctx.font = '60px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('✨', 0, -bodyH - 10);
-    }
-
-    // Eyes (vary by DNA eyeStyle)
-    const eyeGap = bodyW * 0.32;
-    const eyeY = -bodyH * 0.15;
-    if (dna.eyeStyle < 0.33) {
-      // Round dot eyes
-      ctx.fillStyle = '#222';
-      ctx.beginPath(); ctx.arc(-eyeGap, eyeY, 18, 0, Math.PI * 2); ctx.fill();
-      ctx.beginPath(); ctx.arc(eyeGap, eyeY, 18, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = '#fff';
-      ctx.beginPath(); ctx.arc(-eyeGap + 6, eyeY - 6, 5, 0, Math.PI * 2); ctx.fill();
-      ctx.beginPath(); ctx.arc(eyeGap + 6, eyeY - 6, 5, 0, Math.PI * 2); ctx.fill();
-    } else if (dna.eyeStyle < 0.66) {
-      // Curved happy eyes ∪
-      ctx.strokeStyle = '#222';
-      ctx.lineWidth = 9;
-      ctx.lineCap = 'round';
-      ctx.beginPath();
-      ctx.moveTo(-eyeGap - 22, eyeY);
-      ctx.quadraticCurveTo(-eyeGap, eyeY - 30, -eyeGap + 22, eyeY);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(eyeGap - 22, eyeY);
-      ctx.quadraticCurveTo(eyeGap, eyeY - 30, eyeGap + 22, eyeY);
-      ctx.stroke();
-    } else {
-      // Sparkly star eyes
-      ctx.fillStyle = '#222';
-      ctx.beginPath(); ctx.arc(-eyeGap, eyeY, 22, 0, Math.PI * 2); ctx.fill();
-      ctx.beginPath(); ctx.arc(eyeGap, eyeY, 22, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = '#fff';
-      this.drawStar(ctx, -eyeGap + 4, eyeY - 4, 9, 5);
-      this.drawStar(ctx, eyeGap + 4, eyeY - 4, 9, 5);
-    }
-
-    // Mouth (varies by mouthQuirk)
-    ctx.strokeStyle = '#222';
-    ctx.lineWidth = 7;
-    ctx.lineCap = 'round';
-    ctx.beginPath();
-    const mw = bodyW * 0.18;
-    const my = bodyH * 0.2;
-    const curveY = my + 30 + dna.mouthQuirk * 20;
-    ctx.moveTo(-mw, my);
-    ctx.quadraticCurveTo(0, curveY, mw, my);
-    ctx.stroke();
-
-    // Blush
-    if (dna.blushSize > 0.2) {
-      ctx.fillStyle = palette.secondary || '#ffb6c1';
-      ctx.globalAlpha = 0.55;
-      const blushR = 22 + dna.blushSize * 22;
-      ctx.beginPath(); ctx.ellipse(-bodyW * 0.55, my - 20, blushR, blushR * 0.55, 0, 0, Math.PI * 2); ctx.fill();
-      ctx.beginPath(); ctx.ellipse(bodyW * 0.55, my - 20, blushR, blushR * 0.55, 0, 0, Math.PI * 2); ctx.fill();
-      ctx.globalAlpha = 1;
-    }
-
-    ctx.restore();
-  }
-
-  drawStar(ctx, cx, cy, radius, points) {
-    ctx.beginPath();
-    for (let i = 0; i < points * 2; i++) {
-      const r = i % 2 === 0 ? radius : radius / 2;
-      const a = (Math.PI / points) * i - Math.PI / 2;
-      const x = cx + Math.cos(a) * r;
-      const y = cy + Math.sin(a) * r;
-      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-    }
-    ctx.closePath();
-    ctx.fill();
+    PetRenderer.drawPet(ctx, {
+      palette, dna, stageId, cx, cy,
+      radius: 280 * scale,
+      emotion: this.state.getState('emotion') || 'happy'
+    });
   }
 
   drawSparkles(ctx, seed) {

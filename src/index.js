@@ -24,6 +24,7 @@ import { AudioSystem } from './audio/AudioSystem.js';
 import { ActionHandler } from './ui/ActionHandler.js';
 import { ColorSystem } from './ui/ColorSystem.js';
 import { ShareCardSystem } from './share/ShareCardSystem.js';
+import { ARSystem } from './ar/ARSystem.js';
 
 class MochiApp {
   constructor() {
@@ -49,6 +50,7 @@ class MochiApp {
     this.memory = null;
     this.shareCard = null;
     this.easterEggs = null;
+    this.ar = null;
 
     this.updateTimer = null;
     this.routineTimer = null;
@@ -117,6 +119,14 @@ class MochiApp {
 
     // 10. Share Card
     this.shareCard = new ShareCardSystem(this.state, this.i18n, this.colors, this.evolution, this.personality);
+
+    // 11. AR (camera)
+    this.ar = new ARSystem({
+      state: this.state,
+      i18n: this.i18n,
+      colorSystem: this.colors,
+      evolution: this.evolution
+    });
 
     // ─── Adopted-from-link check (?adopt=<seed>) ───
     this.handleAdoptionLink();
@@ -308,6 +318,12 @@ class MochiApp {
     document.getElementById('share-button').addEventListener('click', () => this.onShare());
     document.getElementById('share-icon').addEventListener('click', () => this.onShare());
 
+    // AR
+    document.getElementById('ar-icon').addEventListener('click', () => this.onOpenAR());
+    document.getElementById('ar-close').addEventListener('click', () => this.onCloseAR());
+    document.getElementById('ar-flip').addEventListener('click', () => this.ar.flipCamera());
+    document.getElementById('ar-capture').addEventListener('click', () => this.onARCapture());
+
     // Rename
     document.getElementById('rename-btn').addEventListener('click', () => this.onRename());
 
@@ -468,6 +484,54 @@ class MochiApp {
       console.error('Share failed:', e);
     } finally {
       if (btn) btn.disabled = false;
+    }
+  }
+
+  // ─── AR ───
+
+  async onOpenAR() {
+    // Localize hint before showing
+    const hintEl = document.getElementById('ar-hint');
+    if (hintEl) {
+      hintEl.textContent = this.i18n.t('ar.hint');
+      hintEl.style.animation = 'none';
+      void hintEl.offsetWidth;
+      hintEl.style.animation = '';
+    }
+
+    const result = await this.ar.start();
+    if (!result.ok) {
+      let msgKey = 'ar.failed';
+      if (result.error === 'denied') msgKey = 'ar.denied';
+      else if (result.error === 'unsupported') msgKey = 'ar.unsupported';
+      this.showGenericToast(this.i18n.t(msgKey), 5000);
+    }
+  }
+
+  onCloseAR() {
+    this.ar.stop();
+  }
+
+  async onARCapture() {
+    // Visual flash
+    const flash = document.getElementById('ar-flash');
+    if (flash) {
+      flash.classList.remove('hidden');
+      void flash.offsetWidth;
+      flash.style.animation = 'none';
+      void flash.offsetWidth;
+      flash.style.animation = '';
+      setTimeout(() => flash.classList.add('hidden'), 400);
+    }
+
+    if (this.audio && this.audio.isAvailable()) {
+      try { this.audio.play('tap'); } catch {}
+    }
+
+    const result = await this.ar.captureAndShare();
+    if (result && result.ok) {
+      const key = result.method === 'share' ? 'ar.shared' : 'ar.saved';
+      this.showGenericToast(this.i18n.t(key), 3000);
     }
   }
 

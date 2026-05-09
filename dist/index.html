@@ -13,9 +13,9 @@
   <link rel="manifest" href="./assets/manifest-9s8ZCGQr.json">
   <link rel="icon" type="image/svg+xml" href="./assets/icon-BcejJf9x.svg">
   <link rel="apple-touch-icon" href="./assets/icon-BcejJf9x.svg">
-  <script type="module" crossorigin src="./assets/index-B1bmy4Sy.js"></script>
+  <script type="module" crossorigin src="./assets/index-CfPHZ_el.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/llm-CxKwKzAf.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-D7NNkO05.css">
+  <link rel="stylesheet" crossorigin href="./assets/index-CbgDcCH9.css">
 </head>
 <body>
   <div id="app">
@@ -26,6 +26,7 @@
         <span id="streak-badge" class="streak-badge hidden" title="Daily streak">🔥 <span id="streak-count">0</span></span>
       </div>
       <div class="header-actions">
+        <button id="ar-icon" class="icon-btn" aria-label="AR Mode" title="AR Mode">📸</button>
         <button id="share-icon" class="icon-btn" aria-label="Share Mochi" title="Share">📤</button>
         <a id="support-icon" href="https://buymeacoffee.com/muracciolei" target="_blank" rel="noopener noreferrer" aria-label="Support Mochi" title="Support Mochi">☕</a>
         <button id="settings-toggle" class="icon-btn" aria-label="Open Settings" title="Settings">⚙️</button>
@@ -216,6 +217,21 @@
         </div>
         <button id="onb-start-btn" class="onb-start" data-i18n="onb.start">Adopt 🍡</button>
       </div>
+    </div>
+
+    <!-- AR Overlay (camera + Mochi) -->
+    <div id="ar-overlay" class="ar-overlay hidden" role="dialog" aria-label="AR mode">
+      <video id="ar-video" autoplay muted playsinline></video>
+      <canvas id="ar-canvas" class="ar-canvas"></canvas>
+      <div class="ar-hint" id="ar-hint" data-i18n="ar.hint">Move around. Tap 📷 to take a photo.</div>
+      <div class="ar-controls">
+        <button id="ar-close" class="ar-btn ar-btn-ghost" aria-label="Close AR" title="Close">✕</button>
+        <button id="ar-capture" class="ar-btn ar-btn-capture" aria-label="Take photo" title="Take photo">
+          <span class="ar-capture-ring"></span>
+        </button>
+        <button id="ar-flip" class="ar-btn ar-btn-ghost" aria-label="Flip camera" title="Flip camera">🔄</button>
+      </div>
+      <div id="ar-flash" class="ar-flash hidden"></div>
     </div>
   </div>
 

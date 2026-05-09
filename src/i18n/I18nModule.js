@@ -94,7 +94,14 @@ const TRANSLATIONS = {
     // Easter eggs
     'easter.konami': '🌈 Rainbow mode unlocked!',
     'easter.fullMoon': '🌕 Full moon… mystical energy!',
-    'easter.birthday': "🎂 It's {name}'s birthday!"
+    'easter.birthday': "🎂 It's {name}'s birthday!",
+    // AR
+    'ar.hint': 'Move around. Tap 📷 to take a photo.',
+    'ar.denied': 'Camera permission denied. Enable it in your browser to use AR.',
+    'ar.unsupported': "Your browser doesn't support the camera.",
+    'ar.failed': "Couldn't start the camera. Try again?",
+    'ar.saved': 'Photo saved! 📸',
+    'ar.shared': 'Shared! ✨'
   },
   es: {
     'ui.feed': 'Alimentar',
@@ -181,7 +188,13 @@ const TRANSLATIONS = {
     'memory.highScore': 'Nuevo récord: {score}',
     'easter.konami': '🌈 ¡Modo arcoíris desbloqueado!',
     'easter.fullMoon': '🌕 Luna llena… ¡energía mística!',
-    'easter.birthday': '🎂 ¡Es el cumpleaños de {name}!'
+    'easter.birthday': '🎂 ¡Es el cumpleaños de {name}!',
+    'ar.hint': 'Movete. Tocá 📷 para sacar una foto.',
+    'ar.denied': 'Permiso de cámara denegado. Activalo en el navegador para usar AR.',
+    'ar.unsupported': 'Tu navegador no soporta la cámara.',
+    'ar.failed': 'No pudimos abrir la cámara. ¿Reintentar?',
+    'ar.saved': '¡Foto guardada! 📸',
+    'ar.shared': '¡Compartida! ✨'
   },
   it: {
     'ui.feed': 'Nutrire',
@@ -268,7 +281,13 @@ const TRANSLATIONS = {
     'memory.highScore': 'Nuovo record: {score}',
     'easter.konami': '🌈 Modalità arcobaleno sbloccata!',
     'easter.fullMoon': '🌕 Luna piena… energia mistica!',
-    'easter.birthday': "🎂 È il compleanno di {name}!"
+    'easter.birthday': "🎂 È il compleanno di {name}!",
+    'ar.hint': 'Muoviti. Tocca 📷 per scattare.',
+    'ar.denied': 'Permesso fotocamera negato. Abilitalo per usare AR.',
+    'ar.unsupported': 'Il tuo browser non supporta la fotocamera.',
+    'ar.failed': 'Impossibile avviare la fotocamera. Riprovare?',
+    'ar.saved': 'Foto salvata! 📸',
+    'ar.shared': 'Condivisa! ✨'
   },
   pt: {
     'ui.feed': 'Alimentar',
@@ -355,7 +374,13 @@ const TRANSLATIONS = {
     'memory.highScore': 'Novo recorde: {score}',
     'easter.konami': '🌈 Modo arco-íris desbloqueado!',
     'easter.fullMoon': '🌕 Lua cheia… energia mística!',
-    'easter.birthday': '🎂 É o aniversário de {name}!'
+    'easter.birthday': '🎂 É o aniversário de {name}!',
+    'ar.hint': 'Mova-se. Toque 📷 para tirar uma foto.',
+    'ar.denied': 'Permissão da câmera negada. Habilite no navegador para usar AR.',
+    'ar.unsupported': 'Seu navegador não suporta a câmera.',
+    'ar.failed': 'Não foi possível iniciar a câmera. Tentar de novo?',
+    'ar.saved': 'Foto salva! 📸',
+    'ar.shared': 'Compartilhada! ✨'
   },
   fr: {
     'ui.feed': 'Nourrir',
@@ -442,7 +467,13 @@ const TRANSLATIONS = {
     'memory.highScore': 'Nouveau record : {score}',
     'easter.konami': '🌈 Mode arc-en-ciel débloqué !',
     'easter.fullMoon': '🌕 Pleine lune… énergie mystique !',
-    'easter.birthday': "🎂 C'est l'anniversaire de {name} !"
+    'easter.birthday': "🎂 C'est l'anniversaire de {name} !",
+    'ar.hint': 'Bouge. Appuie sur 📷 pour prendre une photo.',
+    'ar.denied': "Permission caméra refusée. Active-la dans le navigateur pour utiliser l'AR.",
+    'ar.unsupported': 'Ton navigateur ne supporte pas la caméra.',
+    'ar.failed': "Impossible d'ouvrir la caméra. Réessayer ?",
+    'ar.saved': 'Photo enregistrée ! 📸',
+    'ar.shared': 'Partagée ! ✨'
   },
   de: {
     'ui.feed': 'Füttern',
@@ -529,7 +560,13 @@ const TRANSLATIONS = {
     'memory.highScore': 'Neuer Rekord: {score}',
     'easter.konami': '🌈 Regenbogenmodus freigeschaltet!',
     'easter.fullMoon': '🌕 Vollmond… mystische Energie!',
-    'easter.birthday': '🎂 Es ist {name}s Geburtstag!'
+    'easter.birthday': '🎂 Es ist {name}s Geburtstag!',
+    'ar.hint': 'Beweg dich. Tippe 📷 für ein Foto.',
+    'ar.denied': 'Kamerazugriff verweigert. Aktiviere ihn im Browser für AR.',
+    'ar.unsupported': 'Dein Browser unterstützt die Kamera nicht.',
+    'ar.failed': 'Kamera konnte nicht gestartet werden. Erneut versuchen?',
+    'ar.saved': 'Foto gespeichert! 📸',
+    'ar.shared': 'Geteilt! ✨'
   }
 };
 

@@ -1303,6 +1303,139 @@ input:focus {
   transform: translateY(0);
 }
 
+/* ─── AR Overlay ─── */
+.ar-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 700;
+  background: #000;
+  overflow: hidden;
+  animation: fadeIn 0.25s ease;
+}
+
+.ar-overlay.hidden { display: none; }
+
+#ar-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+.ar-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ar-hint {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  pointer-events: none;
+  animation: arHintFade 6s ease-in-out forwards;
+}
+
+@keyframes arHintFade {
+  0%, 70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.ar-controls {
+  position: absolute;
+  bottom: 32px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  padding: 0 24px;
+}
+
+.ar-btn {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #fff;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font);
+}
+
+.ar-btn-ghost {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-full);
+  font-size: 1.15rem;
+  padding: 0;
+}
+
+.ar-btn-ghost:hover {
+  background: rgba(255,255,255,0.25);
+  transform: scale(1.05);
+}
+
+.ar-btn-capture {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  background: rgba(255,255,255,0.25);
+  border: 4px solid rgba(255,255,255,0.95);
+  position: relative;
+  padding: 0;
+}
+
+.ar-btn-capture:active {
+  transform: scale(0.92);
+}
+
+.ar-capture-ring {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-full);
+  background: #fff;
+  display: block;
+  transition: var(--transition);
+}
+
+.ar-btn-capture:hover .ar-capture-ring {
+  transform: scale(0.9);
+  background: var(--color-primary);
+}
+
+.ar-flash {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  pointer-events: none;
+  animation: arFlash 0.4s ease-out;
+}
+
+.ar-flash.hidden { display: none; }
+
+@keyframes arFlash {
+  0% { opacity: 0.95; }
+  100% { opacity: 0; }
+}
+
 /* ─── Birthday confetti ─── */
 .confetti {
   position: fixed;
