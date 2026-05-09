@@ -22,7 +22,38 @@ const DEFAULT_STATE = {
   firstInstall: Date.now(),
   supportNotificationShown: false,
   webLLMEnabled: false,
-  webLLMLoaded: false
+  webLLMLoaded: false,
+  // ─── Identity ───
+  name: null,
+  birthday: null,
+  dnaSeed: null,
+  onboarded: false,
+  // ─── Stats / Counters (drive personality) ───
+  stats: {
+    feedCount: 0,
+    playCount: 0,
+    talkCount: 0,
+    sleepCount: 0,
+    tapCount: 0,
+    gamesPlayed: 0,
+    highScore: 0
+  },
+  // ─── Streak ───
+  streak: {
+    current: 0,
+    longest: 0,
+    lastVisitDay: null
+  },
+  // ─── Mood history (last 30 days, 1 sample/day) ───
+  moodHistory: [],
+  // ─── Memories (auto-captured highlights) ───
+  memories: [],
+  // ─── Easter egg flags ───
+  easterEggs: {
+    konami: false,
+    fullMoon: false,
+    birthdayParty: false
+  }
 };
 
 export class StateManager {
@@ -41,7 +72,7 @@ export class StateManager {
     try {
       const stored = localStorage.getItem(this.STORAGE_KEY);
       if (!stored) {
-        this.state = { ...DEFAULT_STATE };
+        this.state = JSON.parse(JSON.stringify(DEFAULT_STATE));
         return this.state;
       }
 
@@ -50,7 +81,7 @@ export class StateManager {
       return this.state;
     } catch (error) {
       console.error('Failed to load state:', error);
-      this.state = { ...DEFAULT_STATE };
+      this.state = JSON.parse(JSON.stringify(DEFAULT_STATE));
       return this.state;
     }
   }
@@ -69,7 +100,6 @@ export class StateManager {
         localStorage.setItem(this.STORAGE_KEY, serialized);
       } catch (error) {
         console.error('Failed to save state:', error);
-        // Handle quota exceeded
         if (error.name === 'QuotaExceededError') {
           this.clearOldData();
           try {
@@ -84,8 +114,6 @@ export class StateManager {
 
   /**
    * Update specific state property
-   * @param {string} key - State property key
-   * @param {*} value - New value
    */
   updateState(key, value) {
     if (this.state === null) {
@@ -97,8 +125,6 @@ export class StateManager {
 
   /**
    * Get specific state property
-   * @param {string} key - State property key
-   * @returns {*} State value
    */
   getState(key) {
     if (this.state === null) {
@@ -108,28 +134,36 @@ export class StateManager {
   }
 
   /**
+   * Increment a numeric counter inside state.stats
+   */
+  incrementStat(key, by = 1) {
+    if (this.state === null) this.loadState();
+    if (!this.state.stats) this.state.stats = { ...DEFAULT_STATE.stats };
+    this.state.stats[key] = (this.state.stats[key] || 0) + by;
+    this.saveState();
+    return this.state.stats[key];
+  }
+
+  /**
    * Clear all state (reset app)
    */
   clearState() {
-    this.state = { ...DEFAULT_STATE };
+    this.state = JSON.parse(JSON.stringify(DEFAULT_STATE));
     localStorage.removeItem(this.STORAGE_KEY);
   }
 
   /**
-   * Validate loaded state against schema
-   * @param {Object} state - State to validate
-   * @returns {Object} Validated state with defaults for missing properties
+   * Validate loaded state against schema (additive: missing keys filled from defaults)
    */
   validateState(state) {
-    const validated = { ...DEFAULT_STATE };
-    
-    // Validate and copy each property
+    const validated = JSON.parse(JSON.stringify(DEFAULT_STATE));
+
     if (typeof state.emotion === 'string') validated.emotion = state.emotion;
     if (typeof state.mood === 'number') validated.mood = state.mood;
     if (typeof state.hunger === 'number') validated.hunger = state.hunger;
     if (typeof state.energy === 'number') validated.energy = state.energy;
     if (typeof state.lastInteraction === 'number') validated.lastInteraction = state.lastInteraction;
-    if (typeof state.dailyInteractions === 'object') validated.dailyInteractions = state.dailyInteractions;
+    if (typeof state.dailyInteractions === 'object' && state.dailyInteractions) validated.dailyInteractions = state.dailyInteractions;
     if (typeof state.language === 'string') validated.language = state.language;
     if (typeof state.colorPreset === 'string') validated.colorPreset = state.colorPreset;
     if (state.alarm !== undefined) validated.alarm = state.alarm;
@@ -139,6 +173,23 @@ export class StateManager {
     if (typeof state.webLLMEnabled === 'boolean') validated.webLLMEnabled = state.webLLMEnabled;
     if (typeof state.webLLMLoaded === 'boolean') validated.webLLMLoaded = state.webLLMLoaded;
 
+    // ─── New fields (with defaults) ───
+    if (typeof state.name === 'string') validated.name = state.name;
+    if (typeof state.birthday === 'number') validated.birthday = state.birthday;
+    if (typeof state.dnaSeed === 'string') validated.dnaSeed = state.dnaSeed;
+    if (typeof state.onboarded === 'boolean') validated.onboarded = state.onboarded;
+    if (typeof state.stats === 'object' && state.stats) {
+      validated.stats = { ...validated.stats, ...state.stats };
+    }
+    if (typeof state.streak === 'object' && state.streak) {
+      validated.streak = { ...validated.streak, ...state.streak };
+    }
+    if (Array.isArray(state.moodHistory)) validated.moodHistory = state.moodHistory.slice(-30);
+    if (Array.isArray(state.memories)) validated.memories = state.memories.slice(-50);
+    if (typeof state.easterEggs === 'object' && state.easterEggs) {
+      validated.easterEggs = { ...validated.easterEggs, ...state.easterEggs };
+    }
+
     return validated;
   }
 
@@ -146,43 +197,45 @@ export class StateManager {
    * Clear old data to free up storage space
    */
   clearOldData() {
-    // Clear old reminders (older than 7 days)
     const sevenDaysAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
     if (this.state && Array.isArray(this.state.reminders)) {
       this.state.reminders = this.state.reminders.filter(r => r.time > sevenDaysAgo);
+    }
+    if (this.state && Array.isArray(this.state.memories)) {
+      this.state.memories = this.state.memories.slice(-20);
+    }
+    if (this.state && Array.isArray(this.state.moodHistory)) {
+      this.state.moodHistory = this.state.moodHistory.slice(-14);
     }
   }
 
   /**
    * Parse configuration from JSON
-   * @param {string} json - JSON string to parse
-   * @returns {Object} Result object with success/error
    */
   parseConfiguration(json) {
     try {
       const config = JSON.parse(json);
-      
-      // Validate configuration structure
       const errors = [];
-      
-      if (config.language && !['en', 'es', 'it'].includes(config.language)) {
-        errors.push('Invalid language: must be en, es, or it');
+
+      const validLangs = ['en', 'es', 'it', 'pt', 'fr', 'de'];
+      if (config.language && !validLangs.includes(config.language)) {
+        errors.push('Invalid language');
       }
-      
-      const validColors = ['white', 'black', 'pink', 'blue', 'green', 'yellow', 
+
+      const validColors = ['white', 'black', 'pink', 'blue', 'green', 'yellow',
                           'purple', 'orange', 'cyan', 'peach', 'lime', 'lavender'];
       if (config.colorPreset && !validColors.includes(config.colorPreset)) {
         errors.push('Invalid colorPreset');
       }
-      
+
       if (config.alarm && config.alarm.time && !/^\d{2}:\d{2}$/.test(config.alarm.time)) {
         errors.push('Invalid alarm time format: must be HH:MM');
       }
-      
+
       if (config.reminders && !Array.isArray(config.reminders)) {
         errors.push('Invalid reminders: must be an array');
       }
-      
+
       if (errors.length > 0) {
         return {
           success: false,
@@ -190,7 +243,7 @@ export class StateManager {
           config: this.getDefaultConfiguration()
         };
       }
-      
+
       return {
         success: true,
         config: {
@@ -210,11 +263,6 @@ export class StateManager {
     }
   }
 
-  /**
-   * Format configuration to JSON
-   * @param {Object} config - Configuration object
-   * @returns {string} JSON string
-   */
   formatConfiguration(config) {
     const formatted = {
       language: config.language || 'en',
@@ -226,14 +274,10 @@ export class StateManager {
     return JSON.stringify(formatted, null, 2);
   }
 
-  /**
-   * Get default configuration
-   * @returns {Object} Default configuration
-   */
   getDefaultConfiguration() {
     return {
       language: 'en',
-colorPreset: 'black',
+      colorPreset: 'pink',
       alarm: null,
       reminders: [],
       webLLMEnabled: false

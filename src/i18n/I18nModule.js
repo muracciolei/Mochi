@@ -1,5 +1,5 @@
 /**
- * I18nModule - Internationalization support for English, Spanish, Italian
+ * I18nModule - Internationalization (en, es, it, pt, fr, de)
  */
 
 const TRANSLATIONS = {
@@ -13,6 +13,16 @@ const TRANSLATIONS = {
     'ui.reminders': 'Reminders',
     'ui.color': 'Color',
     'ui.language': 'Language',
+    'ui.share': 'Share',
+    'ui.streak': 'Streak',
+    'ui.days': 'days',
+    'ui.day': 'day',
+    'ui.identity': 'Identity',
+    'ui.name': 'Name',
+    'ui.birthday': 'Birthday',
+    'ui.stage': 'Stage',
+    'ui.traits': 'Traits',
+    'ui.memories': 'Memories',
     'dialogue.happy': 'Yay! So happy!',
     'dialogue.hungry': 'Hungry... feed me?',
     'dialogue.sleepy': 'Sleepy... night night!',
@@ -23,30 +33,68 @@ const TRANSLATIONS = {
     'dialogue.talk': ['I love you!', 'Tell me more!', 'Ooh interesting!', 'Really?!', 'Cool!'],
     'dialogue.play': ['Again again!', 'So fun!', 'Wee!', 'Best game!', 'More please!'],
     'notification.support': 'Enjoying Mochi? ☕ Support the project',
+    'notification.streak': '🔥 {n}-day streak!',
+    'notification.evolution': '✨ {name} evolved to {stage}!',
+    'notification.adopted': '🍡 You adopted {name}! Take good care.',
+    'notification.miss': '{name} misses you 🥺',
     'alarm.greeting.morning': 'Good morning! Love you!',
     'alarm.greeting.afternoon': 'Good afternoon! Time for fun!',
     'alarm.greeting.evening': 'Good evening! Sweet dreams!',
     'alarm.trigger': "It's {day} {time}! Wake up!",
     'alarm.reminder': "Don't forget: {text}",
     'error.weather.failed': "Couldn't get weather, sorry!",
-    'error.weather.sunny': 'Sunny and warm!',
-    'error.weather.cloudy': 'Cloudy skies...',
-    'error.weather.rainy': 'Rainy day!',
     'error.network': 'Network hiccup! Try again?',
     'error.api_generic': 'Oopsie! Try again?',
     'error.rate_limit': 'Too many requests! Wait a bit!',
-    'error.not_found': 'Hmm... not sure about that!',
-    'weather.temp': 'Temperature',
-    'weather.conditions': 'Conditions',
+    'error.not_found': "Hmm... not sure about that!",
     'weather.sunny': 'Sunny',
     'weather.cloudy': 'Cloudy',
     'weather.rainy': 'Rainy',
     'weather.stormy': 'Stormy',
     'weather.snowy': 'Snowy',
-    'news.headlines': 'Headlines',
     'support.link': 'Support Mochi ☕',
     'greeting.hello': 'Hello! I am Mochi!',
-    'greeting bye': 'Bye bye! Come back soon!'
+    // Onboarding
+    'onb.welcome': 'Welcome!',
+    'onb.intro': 'A little soul is ready to be born. What should we name it?',
+    'onb.placeholder': 'Pixel, Bubu, Mochi…',
+    'onb.start': 'Adopt 🍡',
+    'onb.lang': 'Choose your language',
+    // Stages
+    'stage.egg': 'Egg',
+    'stage.baby': 'Baby',
+    'stage.child': 'Child',
+    'stage.teen': 'Teen',
+    'stage.adult': 'Adult',
+    // Traits
+    'trait.gourmand': 'Gourmand',
+    'trait.energetic': 'Energetic',
+    'trait.philosopher': 'Philosopher',
+    'trait.melancholic': 'Melancholic',
+    'trait.athlete': 'Athlete',
+    'trait.dreamer': 'Dreamer',
+    'trait.cuddly': 'Cuddly',
+    'trait.balanced': 'Balanced',
+    // Share card
+    'share.title': '{name} the Mochi',
+    'share.subtitle': 'Day {days} · {stage}',
+    'share.mood': 'Mood',
+    'share.streak': 'Streak',
+    'share.text': "Meet {name}, my Mochi! 🍡 Day {days}. Adopt your own:",
+    'share.button': 'Share Mochi',
+    'share.fallback': 'Card copied! Paste anywhere.',
+    'share.adopted': 'You adopted {name} from a friend! 💞',
+    // Memories
+    'memory.firstMeal': 'First meal together',
+    'memory.firstGame': 'First game played',
+    'memory.firstWeek': 'One week together!',
+    'memory.firstMonth': 'One month together! 🎉',
+    'memory.evolved': 'Evolved to {stage}',
+    'memory.highScore': 'New high score: {score}',
+    // Easter eggs
+    'easter.konami': '🌈 Rainbow mode unlocked!',
+    'easter.fullMoon': '🌕 Full moon… mystical energy!',
+    'easter.birthday': "🎂 It's {name}'s birthday!"
   },
   es: {
     'ui.feed': 'Alimentar',
@@ -58,40 +106,82 @@ const TRANSLATIONS = {
     'ui.reminders': 'Recordatorios',
     'ui.color': 'Color',
     'ui.language': 'Idioma',
+    'ui.share': 'Compartir',
+    'ui.streak': 'Racha',
+    'ui.days': 'días',
+    'ui.day': 'día',
+    'ui.identity': 'Identidad',
+    'ui.name': 'Nombre',
+    'ui.birthday': 'Cumpleaños',
+    'ui.stage': 'Etapa',
+    'ui.traits': 'Personalidad',
+    'ui.memories': 'Recuerdos',
     'dialogue.happy': '¡Yay! ¡Tan feliz!',
-    'dialogue.hungry': 'Hambre... ¡alimentame!',
+    'dialogue.hungry': 'Hambre... ¡aliméntame!',
     'dialogue.sleepy': 'Sueño... ¡buenas noches!',
     'dialogue.angry': '¡Grr! ¡No feliz!',
     'dialogue.playing': '¡Yupi! ¡Tan divertido!',
-    'dialogue.feed': ['¡Nom nom!', '¡Rico!', '¡Más por favor!', '¡Delicioso!', '¡ Yum!'],
+    'dialogue.feed': ['¡Nom nom!', '¡Rico!', '¡Más por favor!', '¡Delicioso!', '¡Yum!'],
     'dialogue.sleep': ['¡Dulces sueños!', '¡Buenas noches!', '¡Zzz...!', '¡Descanso!', '¡Shh...!'],
     'dialogue.talk': ['¡Te quiero!', '¡Cuéntame más!', '¡Oh interesante!', '¿¡De verdad?!', '¡Qué cool!'],
     'dialogue.play': ['¡Otra vez!', '¡Tan divertido!', '¡Wee!', '¡Mejor juego!', '¡Más por favor!'],
     'notification.support': '¿Te gusta Mochi? ☕ Apoya el proyecto',
+    'notification.streak': '🔥 ¡Racha de {n} días!',
+    'notification.evolution': '✨ ¡{name} evolucionó a {stage}!',
+    'notification.adopted': '🍡 ¡Adoptaste a {name}! Cuídalo bien.',
+    'notification.miss': '{name} te extraña 🥺',
     'alarm.greeting.morning': '¡Buenos días! ¡Te quiero!',
     'alarm.greeting.afternoon': '¡Buenas tardes! ¡Hora de jugar!',
     'alarm.greeting.evening': '¡Buenas noches! ¡Dulces sueños!',
     'alarm.trigger': '¡Es {day} {time}! ¡Despierta!',
     'alarm.reminder': 'No olvides: {text}',
     'error.weather.failed': '¡No pude obtener el clima!',
-    'error.weather.sunny': '¡Sol y calido!',
-    'error.weather.cloudy': '¡Cielo nublado...',
-    'error.weather.rainy': '¡Día de lluvia!',
     'error.network': '¡Error de red! ¿Intentar de nuevo?',
     'error.api_generic': '¡Ups! ¿Intentar de nuevo?',
     'error.rate_limit': '¡Demasiadas solicitudes! ¡Espera un poco!',
     'error.not_found': '¡Hmm... ¡no sé de eso!',
-    'weather.temp': 'Temperatura',
-    'weather.conditions': 'Condiciones',
     'weather.sunny': 'Soleado',
     'weather.cloudy': 'Nublado',
     'weather.rainy': 'Lluvioso',
     'weather.stormy': 'Tormentoso',
     'weather.snowy': 'Nevando',
-    'news.headlines': 'Titulares',
     'support.link': 'Apoya a Mochi ☕',
     'greeting.hello': '¡Hola! ¡Soy Mochi!',
-    'greeting bye': '¡Adiós! ¡Vuelve pronto!'
+    'onb.welcome': '¡Bienvenido!',
+    'onb.intro': 'Una alma pequeña está lista para nacer. ¿Cómo lo llamamos?',
+    'onb.placeholder': 'Pixel, Bubu, Mochi…',
+    'onb.start': 'Adoptar 🍡',
+    'onb.lang': 'Elige tu idioma',
+    'stage.egg': 'Huevo',
+    'stage.baby': 'Bebé',
+    'stage.child': 'Niño',
+    'stage.teen': 'Adolescente',
+    'stage.adult': 'Adulto',
+    'trait.gourmand': 'Glotón',
+    'trait.energetic': 'Enérgico',
+    'trait.philosopher': 'Filósofo',
+    'trait.melancholic': 'Melancólico',
+    'trait.athlete': 'Atleta',
+    'trait.dreamer': 'Soñador',
+    'trait.cuddly': 'Mimoso',
+    'trait.balanced': 'Equilibrado',
+    'share.title': '{name} el Mochi',
+    'share.subtitle': 'Día {days} · {stage}',
+    'share.mood': 'Ánimo',
+    'share.streak': 'Racha',
+    'share.text': '¡Conocé a {name}, mi Mochi! 🍡 Día {days}. Adoptá el tuyo:',
+    'share.button': 'Compartir Mochi',
+    'share.fallback': '¡Tarjeta copiada! Pegala donde quieras.',
+    'share.adopted': '¡Adoptaste a {name} de un amigo! 💞',
+    'memory.firstMeal': 'Primera comida juntos',
+    'memory.firstGame': 'Primer juego jugado',
+    'memory.firstWeek': '¡Una semana juntos!',
+    'memory.firstMonth': '¡Un mes juntos! 🎉',
+    'memory.evolved': 'Evolucionó a {stage}',
+    'memory.highScore': 'Nuevo récord: {score}',
+    'easter.konami': '🌈 ¡Modo arcoíris desbloqueado!',
+    'easter.fullMoon': '🌕 Luna llena… ¡energía mística!',
+    'easter.birthday': '🎂 ¡Es el cumpleaños de {name}!'
   },
   it: {
     'ui.feed': 'Nutrire',
@@ -103,150 +193,415 @@ const TRANSLATIONS = {
     'ui.reminders': 'Promemoria',
     'ui.color': 'Colore',
     'ui.language': 'Lingua',
+    'ui.share': 'Condividi',
+    'ui.streak': 'Serie',
+    'ui.days': 'giorni',
+    'ui.day': 'giorno',
+    'ui.identity': 'Identità',
+    'ui.name': 'Nome',
+    'ui.birthday': 'Compleanno',
+    'ui.stage': 'Fase',
+    'ui.traits': 'Tratti',
+    'ui.memories': 'Ricordi',
     'dialogue.happy': 'Evviva! Così felice!',
     'dialogue.hungry': 'Fame... dammi da mangiare!',
     'dialogue.sleepy': 'Sonno... buonanotte!',
     'dialogue.angry': 'Grr! Non felice!',
     'dialogue.playing': 'Evviva! Così divertente!',
     'dialogue.feed': ['Nom nom!', 'Squisito!', 'Ancora per favore!', 'Delizioso!', 'Yum!'],
-    'dialogue.sleep': ['Sogni d\'oro!', 'Buonanotte!', 'Zzz...', 'Tempo di riposo!', 'Shh...!'],
+    'dialogue.sleep': ["Sogni d'oro!", 'Buonanotte!', 'Zzz...', 'Tempo di riposo!', 'Shh...!'],
     'dialogue.talk': ['Ti voglio bene!', 'Raccontami di più!', 'Oh interessante!', 'Davvero?!', 'Che figo!'],
     'dialogue.play': ['Ancora!', 'Così divertente!', 'Wee!', 'Miglior gioco!', 'Ancora per favore!'],
     'notification.support': 'Ti piace Mochi? ☕ Supporta il progetto',
+    'notification.streak': '🔥 Serie di {n} giorni!',
+    'notification.evolution': '✨ {name} si è evoluto in {stage}!',
+    'notification.adopted': '🍡 Hai adottato {name}! Prenditene cura.',
+    'notification.miss': '{name} ti manca 🥺',
     'alarm.greeting.morning': 'Buongiorno! Ti voglio bene!',
     'alarm.greeting.afternoon': 'Buon pomeriggio! Tempo di giocare!',
-    'alarm.greeting.evening': 'Buonasera! Sogni d\'oro!',
+    'alarm.greeting.evening': "Buonasera! Sogni d'oro!",
     'alarm.trigger': 'È {day} {time}! Svegliati!',
     'alarm.reminder': 'Non dimenticare: {text}',
     'error.weather.failed': 'Non riesco a ottenere il meteo!',
-    'error.weather.sunny': 'Soleggiato e caldo!',
-    'error.weather.cloudy': 'Cielo nuvoloso...',
-    'error.weather.rainy': 'Giorno di pioggia!',
     'error.network': 'Errore di rete! Riprova?',
     'error.api_generic': 'Ops! Riprova?',
     'error.rate_limit': 'Troppe richieste! Aspetta un po!',
     'error.not_found': 'Hmm... non so di quello!',
-    'weather.temp': 'Temperatura',
-    'weather.conditions': 'Condizioni',
     'weather.sunny': 'Soleggiato',
     'weather.cloudy': 'Nuvoloso',
     'weather.rainy': 'Piovoso',
     'weather.stormy': 'Tempesta',
     'weather.snowy': 'Nevicando',
-    'news.headlines': 'Titoli',
     'support.link': 'Supporta Mochi ☕',
     'greeting.hello': 'Ciao! Sono Mochi!',
-    'greeting bye': 'Ciao! Torna presto!'
+    'onb.welcome': 'Benvenuto!',
+    'onb.intro': 'Una piccola anima è pronta a nascere. Come la chiamiamo?',
+    'onb.placeholder': 'Pixel, Bubu, Mochi…',
+    'onb.start': 'Adotta 🍡',
+    'onb.lang': 'Scegli la tua lingua',
+    'stage.egg': 'Uovo',
+    'stage.baby': 'Cucciolo',
+    'stage.child': 'Bambino',
+    'stage.teen': 'Adolescente',
+    'stage.adult': 'Adulto',
+    'trait.gourmand': 'Goloso',
+    'trait.energetic': 'Energico',
+    'trait.philosopher': 'Filosofo',
+    'trait.melancholic': 'Malinconico',
+    'trait.athlete': 'Atleta',
+    'trait.dreamer': 'Sognatore',
+    'trait.cuddly': 'Coccolone',
+    'trait.balanced': 'Equilibrato',
+    'share.title': '{name} il Mochi',
+    'share.subtitle': 'Giorno {days} · {stage}',
+    'share.mood': 'Umore',
+    'share.streak': 'Serie',
+    'share.text': 'Ti presento {name}, il mio Mochi! 🍡 Giorno {days}. Adotta il tuo:',
+    'share.button': 'Condividi Mochi',
+    'share.fallback': 'Carta copiata! Incollala dove vuoi.',
+    'share.adopted': 'Hai adottato {name} da un amico! 💞',
+    'memory.firstMeal': 'Primo pasto insieme',
+    'memory.firstGame': 'Prima partita giocata',
+    'memory.firstWeek': 'Una settimana insieme!',
+    'memory.firstMonth': 'Un mese insieme! 🎉',
+    'memory.evolved': 'Evoluto in {stage}',
+    'memory.highScore': 'Nuovo record: {score}',
+    'easter.konami': '🌈 Modalità arcobaleno sbloccata!',
+    'easter.fullMoon': '🌕 Luna piena… energia mistica!',
+    'easter.birthday': "🎂 È il compleanno di {name}!"
+  },
+  pt: {
+    'ui.feed': 'Alimentar',
+    'ui.play': 'Brincar',
+    'ui.talk': 'Falar',
+    'ui.sleep': 'Dormir',
+    'ui.settings': 'Configurações',
+    'ui.alarm': 'Alarme',
+    'ui.reminders': 'Lembretes',
+    'ui.color': 'Cor',
+    'ui.language': 'Idioma',
+    'ui.share': 'Compartilhar',
+    'ui.streak': 'Sequência',
+    'ui.days': 'dias',
+    'ui.day': 'dia',
+    'ui.identity': 'Identidade',
+    'ui.name': 'Nome',
+    'ui.birthday': 'Aniversário',
+    'ui.stage': 'Estágio',
+    'ui.traits': 'Personalidade',
+    'ui.memories': 'Memórias',
+    'dialogue.happy': 'Eba! Tão feliz!',
+    'dialogue.hungry': 'Fome... me alimenta?',
+    'dialogue.sleepy': 'Sono... boa noite!',
+    'dialogue.angry': 'Grr! Não feliz!',
+    'dialogue.playing': 'Eba! Tão divertido!',
+    'dialogue.feed': ['Nham nham!', 'Delícia!', 'Mais, por favor!', 'Gostoso!', 'Yum!'],
+    'dialogue.sleep': ['Bons sonhos!', 'Boa noite!', 'Zzz...', 'Hora de descansar!', 'Shhh...'],
+    'dialogue.talk': ['Eu te amo!', 'Conta mais!', 'Que interessante!', 'Sério?!', 'Que legal!'],
+    'dialogue.play': ['De novo!', 'Tão divertido!', 'Eba!', 'Melhor jogo!', 'Mais, por favor!'],
+    'notification.support': 'Curtindo o Mochi? ☕ Apoie o projeto',
+    'notification.streak': '🔥 Sequência de {n} dias!',
+    'notification.evolution': '✨ {name} evoluiu para {stage}!',
+    'notification.adopted': '🍡 Você adotou {name}! Cuide bem.',
+    'notification.miss': '{name} sente sua falta 🥺',
+    'alarm.greeting.morning': 'Bom dia! Te amo!',
+    'alarm.greeting.afternoon': 'Boa tarde! Hora de brincar!',
+    'alarm.greeting.evening': 'Boa noite! Bons sonhos!',
+    'alarm.trigger': 'São {day} {time}! Acorda!',
+    'alarm.reminder': 'Não esqueça: {text}',
+    'error.weather.failed': 'Não consegui o clima, desculpa!',
+    'error.network': 'Erro de rede! Tentar de novo?',
+    'error.api_generic': 'Opa! Tentar de novo?',
+    'error.rate_limit': 'Muitos pedidos! Espera um pouco!',
+    'error.not_found': 'Hmm... não sei disso!',
+    'weather.sunny': 'Ensolarado',
+    'weather.cloudy': 'Nublado',
+    'weather.rainy': 'Chuvoso',
+    'weather.stormy': 'Tempestade',
+    'weather.snowy': 'Nevando',
+    'support.link': 'Apoie o Mochi ☕',
+    'greeting.hello': 'Oi! Eu sou o Mochi!',
+    'onb.welcome': 'Bem-vindo!',
+    'onb.intro': 'Uma alminha está pronta para nascer. Como vamos chamá-la?',
+    'onb.placeholder': 'Pixel, Bubu, Mochi…',
+    'onb.start': 'Adotar 🍡',
+    'onb.lang': 'Escolha seu idioma',
+    'stage.egg': 'Ovo',
+    'stage.baby': 'Bebê',
+    'stage.child': 'Criança',
+    'stage.teen': 'Adolescente',
+    'stage.adult': 'Adulto',
+    'trait.gourmand': 'Guloso',
+    'trait.energetic': 'Enérgico',
+    'trait.philosopher': 'Filósofo',
+    'trait.melancholic': 'Melancólico',
+    'trait.athlete': 'Atleta',
+    'trait.dreamer': 'Sonhador',
+    'trait.cuddly': 'Carinhoso',
+    'trait.balanced': 'Equilibrado',
+    'share.title': '{name} o Mochi',
+    'share.subtitle': 'Dia {days} · {stage}',
+    'share.mood': 'Humor',
+    'share.streak': 'Sequência',
+    'share.text': 'Conheça {name}, meu Mochi! 🍡 Dia {days}. Adote o seu:',
+    'share.button': 'Compartilhar Mochi',
+    'share.fallback': 'Cartão copiado! Cole onde quiser.',
+    'share.adopted': 'Você adotou {name} de um amigo! 💞',
+    'memory.firstMeal': 'Primeira refeição juntos',
+    'memory.firstGame': 'Primeiro jogo jogado',
+    'memory.firstWeek': 'Uma semana juntos!',
+    'memory.firstMonth': 'Um mês juntos! 🎉',
+    'memory.evolved': 'Evoluiu para {stage}',
+    'memory.highScore': 'Novo recorde: {score}',
+    'easter.konami': '🌈 Modo arco-íris desbloqueado!',
+    'easter.fullMoon': '🌕 Lua cheia… energia mística!',
+    'easter.birthday': '🎂 É o aniversário de {name}!'
+  },
+  fr: {
+    'ui.feed': 'Nourrir',
+    'ui.play': 'Jouer',
+    'ui.talk': 'Parler',
+    'ui.sleep': 'Dormir',
+    'ui.settings': 'Paramètres',
+    'ui.alarm': 'Alarme',
+    'ui.reminders': 'Rappels',
+    'ui.color': 'Couleur',
+    'ui.language': 'Langue',
+    'ui.share': 'Partager',
+    'ui.streak': 'Série',
+    'ui.days': 'jours',
+    'ui.day': 'jour',
+    'ui.identity': 'Identité',
+    'ui.name': 'Nom',
+    'ui.birthday': 'Anniversaire',
+    'ui.stage': 'Étape',
+    'ui.traits': 'Personnalité',
+    'ui.memories': 'Souvenirs',
+    'dialogue.happy': 'Youpi ! Si heureux !',
+    'dialogue.hungry': "Faim... nourris-moi ?",
+    'dialogue.sleepy': 'Sommeil... bonne nuit !',
+    'dialogue.angry': 'Grr ! Pas content !',
+    'dialogue.playing': 'Yay ! Si amusant !',
+    'dialogue.feed': ['Miam miam !', 'Délicieux !', "Encore s'il te plaît !", 'Trop bon !', 'Yum !'],
+    'dialogue.sleep': ['Doux rêves !', 'Bonne nuit !', 'Zzz...', 'Repos !', 'Chut...'],
+    'dialogue.talk': ['Je t\'aime !', 'Dis-moi plus !', 'Oh intéressant !', 'Vraiment ?!', 'Trop cool !'],
+    'dialogue.play': ['Encore !', 'Si amusant !', 'Wii !', 'Meilleur jeu !', "Encore s'il te plaît !"],
+    'notification.support': 'Tu aimes Mochi ? ☕ Soutiens le projet',
+    'notification.streak': '🔥 Série de {n} jours !',
+    'notification.evolution': '✨ {name} a évolué en {stage} !',
+    'notification.adopted': '🍡 Tu as adopté {name} ! Prends-en bien soin.',
+    'notification.miss': '{name} te manque 🥺',
+    'alarm.greeting.morning': 'Bonjour ! Je t\'aime !',
+    'alarm.greeting.afternoon': "Bon après-midi ! C'est l'heure de jouer !",
+    'alarm.greeting.evening': 'Bonsoir ! Doux rêves !',
+    'alarm.trigger': 'Il est {day} {time} ! Réveille-toi !',
+    'alarm.reminder': "N'oublie pas : {text}",
+    'error.weather.failed': 'Impossible d\'avoir la météo !',
+    'error.network': 'Souci réseau ! Réessayer ?',
+    'error.api_generic': 'Oups ! Réessayer ?',
+    'error.rate_limit': 'Trop de requêtes ! Attends un peu !',
+    'error.not_found': 'Hmm... je ne sais pas !',
+    'weather.sunny': 'Ensoleillé',
+    'weather.cloudy': 'Nuageux',
+    'weather.rainy': 'Pluvieux',
+    'weather.stormy': 'Orageux',
+    'weather.snowy': 'Neigeux',
+    'support.link': 'Soutenir Mochi ☕',
+    'greeting.hello': 'Salut ! Je suis Mochi !',
+    'onb.welcome': 'Bienvenue !',
+    'onb.intro': 'Une petite âme est prête à naître. Comment l\'appellerons-nous ?',
+    'onb.placeholder': 'Pixel, Bubu, Mochi…',
+    'onb.start': 'Adopter 🍡',
+    'onb.lang': 'Choisis ta langue',
+    'stage.egg': 'Œuf',
+    'stage.baby': 'Bébé',
+    'stage.child': 'Enfant',
+    'stage.teen': 'Ado',
+    'stage.adult': 'Adulte',
+    'trait.gourmand': 'Gourmand',
+    'trait.energetic': 'Énergique',
+    'trait.philosopher': 'Philosophe',
+    'trait.melancholic': 'Mélancolique',
+    'trait.athlete': 'Athlète',
+    'trait.dreamer': 'Rêveur',
+    'trait.cuddly': 'Câlin',
+    'trait.balanced': 'Équilibré',
+    'share.title': '{name} le Mochi',
+    'share.subtitle': 'Jour {days} · {stage}',
+    'share.mood': 'Humeur',
+    'share.streak': 'Série',
+    'share.text': 'Voici {name}, mon Mochi ! 🍡 Jour {days}. Adopte le tien :',
+    'share.button': 'Partager Mochi',
+    'share.fallback': 'Carte copiée ! Colle-la où tu veux.',
+    'share.adopted': 'Tu as adopté {name} d\'un ami ! 💞',
+    'memory.firstMeal': 'Premier repas ensemble',
+    'memory.firstGame': 'Première partie jouée',
+    'memory.firstWeek': 'Une semaine ensemble !',
+    'memory.firstMonth': 'Un mois ensemble ! 🎉',
+    'memory.evolved': 'Évolué en {stage}',
+    'memory.highScore': 'Nouveau record : {score}',
+    'easter.konami': '🌈 Mode arc-en-ciel débloqué !',
+    'easter.fullMoon': '🌕 Pleine lune… énergie mystique !',
+    'easter.birthday': "🎂 C'est l'anniversaire de {name} !"
+  },
+  de: {
+    'ui.feed': 'Füttern',
+    'ui.play': 'Spielen',
+    'ui.talk': 'Sprechen',
+    'ui.sleep': 'Schlafen',
+    'ui.settings': 'Einstellungen',
+    'ui.alarm': 'Wecker',
+    'ui.reminders': 'Erinnerungen',
+    'ui.color': 'Farbe',
+    'ui.language': 'Sprache',
+    'ui.share': 'Teilen',
+    'ui.streak': 'Serie',
+    'ui.days': 'Tage',
+    'ui.day': 'Tag',
+    'ui.identity': 'Identität',
+    'ui.name': 'Name',
+    'ui.birthday': 'Geburtstag',
+    'ui.stage': 'Stufe',
+    'ui.traits': 'Eigenschaften',
+    'ui.memories': 'Erinnerungen',
+    'dialogue.happy': 'Juhu! So glücklich!',
+    'dialogue.hungry': 'Hunger... füttere mich?',
+    'dialogue.sleepy': 'Müde... gute Nacht!',
+    'dialogue.angry': 'Grr! Nicht glücklich!',
+    'dialogue.playing': 'Juhu! So lustig!',
+    'dialogue.feed': ['Mjam mjam!', 'Lecker!', 'Mehr bitte!', 'Köstlich!', 'Yum!'],
+    'dialogue.sleep': ['Süße Träume!', 'Gute Nacht!', 'Zzz...', 'Ruhezeit!', 'Pst...'],
+    'dialogue.talk': ['Ich liebe dich!', 'Erzähl mehr!', 'Oh interessant!', 'Wirklich?!', 'Cool!'],
+    'dialogue.play': ['Nochmal!', 'So lustig!', 'Yay!', 'Bestes Spiel!', 'Mehr bitte!'],
+    'notification.support': 'Magst du Mochi? ☕ Unterstütze das Projekt',
+    'notification.streak': '🔥 {n}-Tage-Serie!',
+    'notification.evolution': '✨ {name} hat sich zu {stage} entwickelt!',
+    'notification.adopted': '🍡 Du hast {name} adoptiert! Pass gut auf.',
+    'notification.miss': '{name} vermisst dich 🥺',
+    'alarm.greeting.morning': 'Guten Morgen! Hab dich lieb!',
+    'alarm.greeting.afternoon': 'Guten Tag! Zeit zum Spielen!',
+    'alarm.greeting.evening': 'Guten Abend! Süße Träume!',
+    'alarm.trigger': 'Es ist {day} {time}! Aufwachen!',
+    'alarm.reminder': 'Vergiss nicht: {text}',
+    'error.weather.failed': 'Konnte das Wetter nicht abrufen!',
+    'error.network': 'Netzwerkfehler! Nochmal versuchen?',
+    'error.api_generic': 'Hoppla! Nochmal versuchen?',
+    'error.rate_limit': 'Zu viele Anfragen! Warte kurz!',
+    'error.not_found': 'Hmm... weiß ich nicht!',
+    'weather.sunny': 'Sonnig',
+    'weather.cloudy': 'Bewölkt',
+    'weather.rainy': 'Regnerisch',
+    'weather.stormy': 'Stürmisch',
+    'weather.snowy': 'Schneit',
+    'support.link': 'Mochi unterstützen ☕',
+    'greeting.hello': 'Hallo! Ich bin Mochi!',
+    'onb.welcome': 'Willkommen!',
+    'onb.intro': 'Eine kleine Seele ist bereit, geboren zu werden. Wie nennen wir sie?',
+    'onb.placeholder': 'Pixel, Bubu, Mochi…',
+    'onb.start': 'Adoptieren 🍡',
+    'onb.lang': 'Wähle deine Sprache',
+    'stage.egg': 'Ei',
+    'stage.baby': 'Baby',
+    'stage.child': 'Kind',
+    'stage.teen': 'Teenager',
+    'stage.adult': 'Erwachsen',
+    'trait.gourmand': 'Genießer',
+    'trait.energetic': 'Energisch',
+    'trait.philosopher': 'Philosoph',
+    'trait.melancholic': 'Melancholisch',
+    'trait.athlete': 'Athlet',
+    'trait.dreamer': 'Träumer',
+    'trait.cuddly': 'Kuschelig',
+    'trait.balanced': 'Ausgeglichen',
+    'share.title': '{name} der Mochi',
+    'share.subtitle': 'Tag {days} · {stage}',
+    'share.mood': 'Stimmung',
+    'share.streak': 'Serie',
+    'share.text': 'Triff {name}, meinen Mochi! 🍡 Tag {days}. Adoptiere deinen:',
+    'share.button': 'Mochi teilen',
+    'share.fallback': 'Karte kopiert! Füge sie überall ein.',
+    'share.adopted': 'Du hast {name} von einem Freund adoptiert! 💞',
+    'memory.firstMeal': 'Erste Mahlzeit zusammen',
+    'memory.firstGame': 'Erstes Spiel gespielt',
+    'memory.firstWeek': 'Eine Woche zusammen!',
+    'memory.firstMonth': 'Einen Monat zusammen! 🎉',
+    'memory.evolved': 'Entwickelt zu {stage}',
+    'memory.highScore': 'Neuer Rekord: {score}',
+    'easter.konami': '🌈 Regenbogenmodus freigeschaltet!',
+    'easter.fullMoon': '🌕 Vollmond… mystische Energie!',
+    'easter.birthday': '🎂 Es ist {name}s Geburtstag!'
   }
 };
+
+const SUPPORTED = ['en', 'es', 'it', 'pt', 'fr', 'de'];
 
 export class I18nModule {
   constructor() {
     this.currentLanguage = this.detectLanguage();
   }
 
-  /**
-   * Detect language from browser
-   * @returns {string} Language code (en, es, it)
-   */
   detectLanguage() {
-    const browserLang = navigator.language.toLowerCase().split('-')[0];
-    
-    if (browserLang === 'es') return 'es';
-    if (browserLang === 'it') return 'it';
-    return 'en'; // Default to English
+    const browserLang = (navigator.language || 'en').toLowerCase().split('-')[0];
+    return SUPPORTED.includes(browserLang) ? browserLang : 'en';
   }
 
-  /**
-   * Set language
-   * @param {string} lang - Language code
-   */
   setLanguage(lang) {
-    if (['en', 'es', 'it'].includes(lang)) {
+    if (SUPPORTED.includes(lang)) {
       this.currentLanguage = lang;
     }
   }
 
-  /**
-   * Get current language
-   * @returns {string} Current language code
-   */
   getCurrentLanguage() {
     return this.currentLanguage;
   }
 
-  /**
-   * Translate key
-   * @param {string} key - Translation key
-   * @param {Object} params - Optional parameters for interpolation
-   * @returns {string} Translated text
-   */
+  getSupportedLanguages() {
+    return SUPPORTED.slice();
+  }
+
   t(key, params = {}) {
     const translations = TRANSLATIONS[this.currentLanguage] || TRANSLATIONS.en;
-    let text = translations[key] || key;
-    
-    // If it's an array (for dialogue), pick random
+    let text = translations[key];
+    if (text === undefined) text = TRANSLATIONS.en[key] || key;
+
     if (Array.isArray(text)) {
       text = text[Math.floor(Math.random() * text.length)];
     }
-    
-    // If it's still not a string, return key
-    if (typeof text !== 'string') {
-      return key;
-    }
-    
-    // Simple parameter interpolation
+
+    if (typeof text !== 'string') return key;
+
     Object.keys(params).forEach(param => {
-      text = text.replace(`{${param}}`, params[param]);
+      text = text.replace(new RegExp(`\\{${param}\\}`, 'g'), params[param]);
     });
-    
+
     return text;
   }
 
-  /**
-   * Get random dialogue for action
-   * @param {string} action - Action name (feed, sleep, talk, play)
-   * @returns {string} Random dialogue
-   */
   getDialogue(action) {
     return this.t(`dialogue.${action}`);
   }
 
-  /**
-   * Get localized date/time format
-   * @param {Date} date - Date to format
-   * @returns {string} Formatted date/time string
-   */
   formatDateTime(date) {
     const options = {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+      hour: '2-digit', minute: '2-digit'
     };
-    
     const locales = {
-      en: 'en-US',
-      es: 'es-ES',
-      it: 'it-IT'
+      en: 'en-US', es: 'es-ES', it: 'it-IT',
+      pt: 'pt-BR', fr: 'fr-FR', de: 'de-DE'
     };
-    
     return date.toLocaleString(locales[this.currentLanguage] || 'en-US', options);
   }
 
-  /**
-   * Get day of week name
-   * @param {Date} date - Date
-   * @returns {string} Day name
-   */
   getDayName(date) {
     const days = {
       en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
       es: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-      it: ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato']
+      it: ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'],
+      pt: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+      fr: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+      de: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag']
     };
-    return days[this.currentLanguage][date.getDay()];
+    return (days[this.currentLanguage] || days.en)[date.getDay()];
   }
 }

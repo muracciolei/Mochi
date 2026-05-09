@@ -19,10 +19,14 @@
   <div id="app">
     <!-- Header -->
     <header id="app-header">
-      <h1 id="app-title">🍡 Mochi</h1>
+      <div class="header-left">
+        <h1 id="app-title">🍡 <span id="pet-name-header">Mochi</span></h1>
+        <span id="streak-badge" class="streak-badge hidden" title="Daily streak">🔥 <span id="streak-count">0</span></span>
+      </div>
       <div class="header-actions">
+        <button id="share-icon" class="icon-btn" aria-label="Share Mochi" title="Share">📤</button>
         <a id="support-icon" href="https://buymeacoffee.com/muracciolei" target="_blank" rel="noopener noreferrer" aria-label="Support Mochi" title="Support Mochi">☕</a>
-        <button id="settings-toggle" aria-label="Open Settings" title="Settings">⚙️</button>
+        <button id="settings-toggle" class="icon-btn" aria-label="Open Settings" title="Settings">⚙️</button>
       </div>
     </header>
 
@@ -55,10 +59,14 @@
       <div id="mochi-touch-zone" tabindex="0" aria-label="Pet Mochi"></div>
     </div>
 
-    <!-- Emotion Indicator -->
-    <div id="emotion-indicator" aria-label="Current mood">
-      <span id="emotion-emoji">😊</span>
-      <span id="emotion-text">Happy</span>
+    <!-- Stage / Emotion / Traits row -->
+    <div id="meta-row">
+      <span id="stage-pill" class="meta-pill"><span id="stage-text">Adult</span></span>
+      <span id="emotion-indicator" class="meta-pill" aria-label="Current mood">
+        <span id="emotion-emoji">😊</span>
+        <span id="emotion-text">Happy</span>
+      </span>
+      <span id="traits-pill" class="meta-pill hidden"><span id="traits-text"></span></span>
     </div>
 
     <!-- Action Buttons -->
@@ -81,10 +89,16 @@
       </button>
     </div>
 
+    <!-- Share Button (prominent, always visible) -->
+    <button id="share-button" class="share-btn" aria-label="Share Mochi card">
+      <span class="share-btn-icon">📤</span>
+      <span class="share-btn-label" data-i18n="share.button">Share Mochi</span>
+    </button>
+
     <!-- Support Button (always visible) -->
     <a id="support-button" class="support-btn" href="https://buymeacoffee.com/muracciolei" target="_blank" rel="noopener noreferrer" aria-label="Support Mochi on Buy Me a Coffee">
       <span class="support-btn-icon">☕</span>
-      <span class="support-btn-label">Support Mochi</span>
+      <span class="support-btn-label" data-i18n="support.link">Support Mochi</span>
     </a>
 
     <!-- Settings Panel (overlay) -->
@@ -94,6 +108,19 @@
         <button id="settings-close" class="close-btn" aria-label="Close Settings">✕</button>
       </div>
       <div class="panel-body">
+        <!-- Identity -->
+        <section class="settings-section identity-section">
+          <h3 data-i18n="ui.identity">Identity</h3>
+          <div class="identity-info">
+            <div class="identity-row"><span class="identity-key" data-i18n="ui.name">Name</span><span id="info-name" class="identity-val">—</span></div>
+            <div class="identity-row"><span class="identity-key" data-i18n="ui.birthday">Birthday</span><span id="info-birthday" class="identity-val">—</span></div>
+            <div class="identity-row"><span class="identity-key" data-i18n="ui.stage">Stage</span><span id="info-stage" class="identity-val">—</span></div>
+            <div class="identity-row"><span class="identity-key" data-i18n="ui.traits">Traits</span><span id="info-traits" class="identity-val">—</span></div>
+            <div class="identity-row"><span class="identity-key" data-i18n="ui.streak">Streak</span><span id="info-streak" class="identity-val">—</span></div>
+          </div>
+          <button id="rename-btn" class="small-btn" style="margin-top:10px">✏️ <span data-i18n="ui.name">Name</span></button>
+        </section>
+
         <!-- Color Selection -->
         <section class="settings-section">
           <h3 data-i18n="ui.color">Color</h3>
@@ -107,7 +134,16 @@
             <button class="lang-btn" data-lang="en">🇬🇧 English</button>
             <button class="lang-btn" data-lang="es">🇪🇸 Español</button>
             <button class="lang-btn" data-lang="it">🇮🇹 Italiano</button>
+            <button class="lang-btn" data-lang="pt">🇵🇹 Português</button>
+            <button class="lang-btn" data-lang="fr">🇫🇷 Français</button>
+            <button class="lang-btn" data-lang="de">🇩🇪 Deutsch</button>
           </div>
+        </section>
+
+        <!-- Memories -->
+        <section class="settings-section">
+          <h3 data-i18n="ui.memories">Memories</h3>
+          <ul id="memories-list" class="memories-list"></ul>
         </section>
 
         <!-- Alarm -->
@@ -134,7 +170,7 @@
 
         <!-- About -->
         <section class="settings-section about-section">
-          <p class="about-text">Mochi v1.0 — AI Virtual Pet</p>
+          <p class="about-text">Mochi v2.0 — AI Virtual Pet</p>
           <a href="https://buymeacoffee.com/muracciolei" target="_blank" rel="noopener noreferrer" class="support-link" id="support-link" data-i18n="support.link">Support Mochi ☕</a>
         </section>
       </div>
@@ -147,10 +183,37 @@
       <button id="support-toast-close" class="toast-close" aria-label="Dismiss">✕</button>
     </div>
 
+    <!-- Generic Toast -->
+    <div id="generic-toast" class="toast generic-toast hidden" role="alert" aria-live="assertive">
+      <p id="generic-toast-text"></p>
+    </div>
+
     <!-- Listening indicator -->
     <div id="listening-indicator" class="hidden" aria-label="Listening for voice input">
       <div class="pulse-ring"></div>
       <span>🎤</span>
+    </div>
+
+    <!-- Onboarding overlay -->
+    <div id="onboarding" class="onboarding hidden" role="dialog" aria-label="Welcome">
+      <div class="onb-card">
+        <div class="onb-egg">🥚</div>
+        <h2 id="onb-welcome" data-i18n="onb.welcome">Welcome!</h2>
+        <p id="onb-intro" data-i18n="onb.intro">A little soul is ready to be born. What should we name it?</p>
+        <input id="onb-name-input" type="text" maxlength="20" placeholder="Pixel" aria-label="Pet name">
+        <div id="onb-lang-row" class="onb-lang">
+          <p data-i18n="onb.lang">Choose your language</p>
+          <div class="lang-options">
+            <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
+            <button class="lang-btn" data-lang="es">🇪🇸 ES</button>
+            <button class="lang-btn" data-lang="it">🇮🇹 IT</button>
+            <button class="lang-btn" data-lang="pt">🇵🇹 PT</button>
+            <button class="lang-btn" data-lang="fr">🇫🇷 FR</button>
+            <button class="lang-btn" data-lang="de">🇩🇪 DE</button>
+          </div>
+        </div>
+        <button id="onb-start-btn" class="onb-start" data-i18n="onb.start">Adopt 🍡</button>
+      </div>
     </div>
   </div>
 

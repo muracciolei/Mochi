@@ -2,14 +2,14 @@
  * Mochi Service Worker — Offline caching strategy
  */
 
-const CACHE_NAME = 'mochi-v3';
+const CACHE_NAME = 'mochi-v4';
 const STATIC_ASSETS = [
   './',
   './index.html',
   './assets/manifest-9s8ZCGQr.json',
   './assets/icon-BcejJf9x.svg',
-  './assets/index-DBQUmx-O.js',
-  './assets/index-BVWaginB.css',
+  './assets/index-B1bmy4Sy.js',
+  './assets/index-D7NNkO05.css',
   './assets/llm-CxKwKzAf.js',
   './assets/RSSParser-DVh2S25m.js'
 ];
