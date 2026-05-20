@@ -101,7 +101,18 @@ const TRANSLATIONS = {
     'ar.unsupported': "Your browser doesn't support the camera.",
     'ar.failed': "Couldn't start the camera. Try again?",
     'ar.saved': 'Photo saved! 📸',
-    'ar.shared': 'Shared! ✨'
+    'ar.shared': 'Shared! ✨',
+    // Eggs
+    'egg.noEggs': 'No eggs yet. Create one!',
+    'egg.created': 'Egg created! 🥚 Timer: 15s',
+    'egg.unnamed': 'Unnamed Egg',
+    'egg.namePlaceholder': 'Give your egg a name...',
+    'egg.name': 'Name',
+    'egg.delete': 'Delete',
+    'egg.deleteConfirm': 'Delete this egg?',
+    'egg.hatched': '🐣 {name} hatched!',
+    'egg.hatched_label': 'Hatched',
+    'memory.eggHatched': 'Egg {eggName} hatched'
   },
   es: {
     'ui.feed': 'Alimentar',
@@ -194,7 +205,18 @@ const TRANSLATIONS = {
     'ar.unsupported': 'Tu navegador no soporta la cámara.',
     'ar.failed': 'No pudimos abrir la cámara. ¿Reintentar?',
     'ar.saved': '¡Foto guardada! 📸',
-    'ar.shared': '¡Compartida! ✨'
+    'ar.shared': '¡Compartida! ✨',
+    // Eggs
+    'egg.noEggs': 'Aún no hay huevos. ¡Crea uno!',
+    'egg.created': '¡Huevo creado! 🥚 Timer: 15s',
+    'egg.unnamed': 'Huevo sin nombre',
+    'egg.namePlaceholder': 'Dale un nombre a tu huevo...',
+    'egg.name': 'Nombre',
+    'egg.delete': 'Eliminar',
+    'egg.deleteConfirm': '¿Eliminar este huevo?',
+    'egg.hatched': '🐣 ¡{name} eclosionó!',
+    'egg.hatched_label': 'Eclosionado',
+    'memory.eggHatched': 'Huevo {eggName} eclosionó'
   },
   it: {
     'ui.feed': 'Nutrire',
@@ -287,7 +309,18 @@ const TRANSLATIONS = {
     'ar.unsupported': 'Il tuo browser non supporta la fotocamera.',
     'ar.failed': 'Impossibile avviare la fotocamera. Riprovare?',
     'ar.saved': 'Foto salvata! 📸',
-    'ar.shared': 'Condivisa! ✨'
+    'ar.shared': 'Condivisa! ✨',
+    // Eggs
+    'egg.noEggs': 'Nessun uovo ancora. Creane uno!',
+    'egg.created': 'Uovo creato! 🥚 Timer: 15s',
+    'egg.unnamed': 'Uovo senza nome',
+    'egg.namePlaceholder': 'Dai un nome al tuo uovo...',
+    'egg.name': 'Nome',
+    'egg.delete': 'Elimina',
+    'egg.deleteConfirm': 'Eliminare questo uovo?',
+    'egg.hatched': '🐣 {name} è schiuso!',
+    'egg.hatched_label': 'Schiuso',
+    'memory.eggHatched': 'Uovo {eggName} è schiuso'
   },
   pt: {
     'ui.feed': 'Alimentar',
@@ -380,7 +413,18 @@ const TRANSLATIONS = {
     'ar.unsupported': 'Seu navegador não suporta a câmera.',
     'ar.failed': 'Não foi possível iniciar a câmera. Tentar de novo?',
     'ar.saved': 'Foto salva! 📸',
-    'ar.shared': 'Compartilhada! ✨'
+    'ar.shared': 'Compartilhada! ✨',
+    // Eggs
+    'egg.noEggs': 'Nenhum ovo ainda. Crie um!',
+    'egg.created': 'Ovo criado! 🥚 Timer: 15s',
+    'egg.unnamed': 'Ovo sem nome',
+    'egg.namePlaceholder': 'Dê um nome ao seu ovo...',
+    'egg.name': 'Nome',
+    'egg.delete': 'Deletar',
+    'egg.deleteConfirm': 'Deletar este ovo?',
+    'egg.hatched': '🐣 {name} nasceu!',
+    'egg.hatched_label': 'Nascido',
+    'memory.eggHatched': 'Ovo {eggName} nasceu'
   },
   fr: {
     'ui.feed': 'Nourrir',
@@ -473,7 +517,18 @@ const TRANSLATIONS = {
     'ar.unsupported': 'Ton navigateur ne supporte pas la caméra.',
     'ar.failed': "Impossible d'ouvrir la caméra. Réessayer ?",
     'ar.saved': 'Photo enregistrée ! 📸',
-    'ar.shared': 'Partagée ! ✨'
+    'ar.shared': 'Partagée ! ✨',
+    // Eggs
+    'egg.noEggs': "Pas d'œufs encore. Crée-en un!",
+    'egg.created': 'Œuf créé! 🥚 Timer: 15s',
+    'egg.unnamed': 'Œuf sans nom',
+    'egg.namePlaceholder': 'Donne un nom à ton œuf...',
+    'egg.name': 'Nom',
+    'egg.delete': 'Supprimer',
+    'egg.deleteConfirm': 'Supprimer cet œuf ?',
+    'egg.hatched': '🐣 {name} est éclos!',
+    'egg.hatched_label': 'Éclos',
+    'memory.eggHatched': 'Œuf {eggName} est éclos'
   },
   de: {
     'ui.feed': 'Füttern',
@@ -566,7 +621,18 @@ const TRANSLATIONS = {
     'ar.unsupported': 'Dein Browser unterstützt die Kamera nicht.',
     'ar.failed': 'Kamera konnte nicht gestartet werden. Erneut versuchen?',
     'ar.saved': 'Foto gespeichert! 📸',
-    'ar.shared': 'Geteilt! ✨'
+    'ar.shared': 'Geteilt! ✨',
+    // Eggs
+    'egg.noEggs': 'Noch keine Eier. Erstelle eines!',
+    'egg.created': 'Ei erstellt! 🥚 Timer: 15s',
+    'egg.unnamed': 'Namenlos Ei',
+    'egg.namePlaceholder': 'Gib deinem Ei einen Namen...',
+    'egg.name': 'Name',
+    'egg.delete': 'Löschen',
+    'egg.deleteConfirm': 'Dieses Ei löschen?',
+    'egg.hatched': '🐣 {name} ist geschlüpft!',
+    'egg.hatched_label': 'Geschlüpft',
+    'memory.eggHatched': 'Ei {eggName} ist geschlüpft'
   }
 };
 
