@@ -54,7 +54,9 @@ const DEFAULT_STATE = {
     konami: false,
     fullMoon: false,
     birthdayParty: false
-  }
+  },
+  // ─── Eggs (egg hatching system) ───
+  eggs: []
 };
 
 export class StateManager {
@@ -190,6 +192,7 @@ export class StateManager {
     if (typeof state.easterEggs === 'object' && state.easterEggs) {
       validated.easterEggs = { ...validated.easterEggs, ...state.easterEggs };
     }
+    if (Array.isArray(state.eggs)) validated.eggs = state.eggs;
 
     return validated;
   }

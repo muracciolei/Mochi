@@ -1453,3 +1453,108 @@ input:focus {
   }
 }
 
+/* Egg System */
+.egg-control {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.eggs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.eggs-empty {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.egg-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.egg-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.egg-name {
+  flex: 1;
+  font-weight: 500;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+.egg-stats {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  min-width: 4rem;
+  text-align: right;
+}
+
+.egg-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.egg-btn {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.egg-btn:hover {
+  background: var(--surface);
+  border-color: var(--accent);
+}
+
+.egg-btn-delete {
+  color: #e74c3c;
+  border-color: #e74c3c;
+}
+
+.egg-btn-delete:hover {
+  background: rgba(231, 76, 60, 0.1);
+}
+
+@media (max-width: 480px) {
+  .egg-item {
+    flex-wrap: wrap;
+  }
+
+  .egg-stats {
+    order: 3;
+    width: 100%;
+    margin-top: 0.5rem;
+    text-align: left;
+  }
+
+  .egg-actions {
+    order: 4;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .egg-actions .egg-btn {
+    flex: 1;
+  }
+}
+

@@ -14,6 +14,7 @@ import { PersonalitySystem } from './state/PersonalitySystem.js';
 import { StreakSystem } from './state/StreakSystem.js';
 import { MemorySystem } from './state/MemorySystem.js';
 import { EasterEggSystem } from './state/EasterEggSystem.js';
+import { EggSystem } from './state/EggSystem.js';
 import { AnimationEngine } from './animations/AnimationEngine.js';
 import { VoiceSystem } from './voice/VoiceSystem.js';
 import { ToolSystem } from './apis/ToolSystem.js';
@@ -50,6 +51,7 @@ class MochiApp {
     this.memory = null;
     this.shareCard = null;
     this.easterEggs = null;
+    this.eggs = null;
     this.ar = null;
 
     this.updateTimer = null;
@@ -84,6 +86,9 @@ class MochiApp {
     // 4. Easter eggs
     this.easterEggs = new EasterEggSystem(this.state, this.i18n, (eggId) => this.onEasterEgg(eggId));
     this.easterEggs.bind();
+
+    // 4b. Egg system
+    this.eggs = new EggSystem(this.state, this.i18n);
 
     // 5. Emotional / Audio / Voice
     this.emotional = new EmotionalSystem(this.state, this.i18n);
@@ -204,6 +209,7 @@ class MochiApp {
     this.buildMemoriesList();
     this.updateAlarmStatus();
     this.updateIdentityPanel();
+    this.updateEggsList();
 
     // Detect stage transition (capture memory if changed since last visit)
     const transition = this.evolution.detectTransition();
@@ -219,6 +225,9 @@ class MochiApp {
 
     // Easter egg passive checks (full moon / birthday)
     this.easterEggs.checkPassive(this.identity);
+
+    // Restore egg hatch timers
+    this.eggs.restoreHatchTimers();
 
     // Show greeting (or adoption message)
     this.showGreeting();
@@ -326,6 +335,12 @@ class MochiApp {
 
     // Rename
     document.getElementById('rename-btn').addEventListener('click', () => this.onRename());
+
+    // Eggs
+    const eggCreateBtn = document.getElementById('egg-create-btn');
+    if (eggCreateBtn) {
+      eggCreateBtn.addEventListener('click', () => this.onCreateEgg());
+    }
 
     document.getElementById('mochi-touch-zone').addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
@@ -549,6 +564,116 @@ class MochiApp {
       this.updateHeader();
       this.updateIdentityPanel();
     }
+  }
+
+  // ─── Egg System ───
+
+  onCreateEgg() {
+    const egg = this.eggs.createEgg();
+    this.showGenericToast(this.i18n.t('egg.created', { id: egg.id.slice(0, 8) }));
+    this.updateEggsList();
+    this.startEggTimerUpdates();
+  }
+
+  onNameEgg(eggId) {
+    const egg = this.eggs.getEgg(eggId);
+    if (!egg) return;
+
+    const current = egg.name || this.i18n.t('egg.unnamed');
+    const next = prompt(this.i18n.t('egg.namePlaceholder'), current);
+    if (next && next.trim()) {
+      const trimmed = next.trim().slice(0, 20);
+      this.eggs.nameEgg(eggId, trimmed);
+      this.updateEggsList();
+
+      const timeRemaining = this.eggs.getTimeRemaining(eggId);
+      if (timeRemaining <= 0) {
+        this.showGenericToast(this.i18n.t('egg.hatched', { name: trimmed }));
+        this.memory.capture('memory.eggHatched', { eggName: trimmed });
+      }
+    }
+  }
+
+  onDeleteEgg(eggId) {
+    if (confirm(this.i18n.t('egg.deleteConfirm'))) {
+      this.eggs.deleteEgg(eggId);
+      this.updateEggsList();
+    }
+  }
+
+  updateEggsList() {
+    const container = document.getElementById('eggs-list');
+    if (!container) return;
+
+    container.innerHTML = '';
+    const eggs = this.eggs.getEggs();
+
+    if (eggs.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'eggs-empty';
+      empty.textContent = this.i18n.t('egg.noEggs');
+      container.appendChild(empty);
+      return;
+    }
+
+    eggs.forEach(egg => {
+      const item = document.createElement('div');
+      item.className = 'egg-item';
+
+      const icon = document.createElement('span');
+      icon.className = 'egg-icon';
+      icon.textContent = egg.hatched ? '🐣' : '🥚';
+
+      const name = document.createElement('span');
+      name.className = 'egg-name';
+      name.textContent = egg.name || this.i18n.t('egg.unnamed');
+
+      const stats = document.createElement('span');
+      stats.className = 'egg-stats';
+      const timeRemaining = this.eggs.getTimeRemainingFormatted(egg.id);
+      stats.textContent = egg.hatched
+        ? this.i18n.t('egg.hatched_label')
+        : timeRemaining;
+
+      const actions = document.createElement('div');
+      actions.className = 'egg-actions';
+
+      const nameBtn = document.createElement('button');
+      nameBtn.className = 'egg-btn egg-btn-name';
+      nameBtn.textContent = this.i18n.t('egg.name');
+      nameBtn.addEventListener('click', () => this.onNameEgg(egg.id));
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'egg-btn egg-btn-delete';
+      deleteBtn.textContent = this.i18n.t('egg.delete');
+      deleteBtn.addEventListener('click', () => this.onDeleteEgg(egg.id));
+
+      actions.appendChild(nameBtn);
+      actions.appendChild(deleteBtn);
+
+      item.appendChild(icon);
+      item.appendChild(name);
+      item.appendChild(stats);
+      item.appendChild(actions);
+
+      container.appendChild(item);
+    });
+  }
+
+  startEggTimerUpdates() {
+    if (this._eggTimerInterval) clearInterval(this._eggTimerInterval);
+
+    this._eggTimerInterval = setInterval(() => {
+      const eggs = this.eggs.getEggs();
+      const hasActive = eggs.some(e => !e.hatched && this.eggs.getTimeRemaining(e.id) > 0);
+
+      if (hasActive) {
+        this.updateEggsList();
+      } else {
+        clearInterval(this._eggTimerInterval);
+        this._eggTimerInterval = null;
+      }
+    }, 500);
   }
 
   // ─── Easter Egg Handler ───
