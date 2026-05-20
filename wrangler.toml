@@ -1,0 +1,19 @@
+name = "mochi-ai-pet"
+type = "javascript"
+main = "dist/index.html"
+compatibility_date = "2024-01-01"
+
+# Cloudflare Pages configuration
+[env.production]
+routes = [
+  { pattern = "*.js", custom_domain = true },
+  { pattern = "*.css", custom_domain = true }
+]
+
+# Static assets
+[[asset.bindings]]
+directory = "dist/"
+
+[build]
+command = "npm run build"
+cwd = "./"
